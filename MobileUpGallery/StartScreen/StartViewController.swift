@@ -7,23 +7,16 @@
 
 import UIKit
 
-class StartVC: UIViewController {
+class StartViewController: UIViewController {
 
     @IBOutlet weak var authButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#function)
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        authButton.layer.cornerRadius = 10
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(#function)
+        authButton.layer.cornerRadius = 12
     }
 
     @IBAction func authButtonAction() {

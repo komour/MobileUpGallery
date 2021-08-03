@@ -8,22 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		C537A85526B8872D00C9DC56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537A85426B8872D00C9DC56 /* AppDelegate.swift */; };
-		C537A85726B8872D00C9DC56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537A85626B8872D00C9DC56 /* SceneDelegate.swift */; };
-		C537A85926B8872D00C9DC56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537A85826B8872D00C9DC56 /* ViewController.swift */; };
-		C537A85C26B8872D00C9DC56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C537A85A26B8872D00C9DC56 /* Main.storyboard */; };
+		C537A85926B8872D00C9DC56 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C537A85826B8872D00C9DC56 /* StartVC.swift */; };
 		C537A85E26B8872F00C9DC56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C537A85D26B8872F00C9DC56 /* Assets.xcassets */; };
-		C537A86126B8872F00C9DC56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C537A85F26B8872F00C9DC56 /* LaunchScreen.storyboard */; };
+		C537A86926B9541E00C9DC56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C537A86826B9541E00C9DC56 /* LaunchScreen.xib */; };
+		C537A86C26B955D900C9DC56 /* StartScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C537A86B26B955D900C9DC56 /* StartScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C537A85126B8872D00C9DC56 /* MobileUpGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileUpGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C537A85426B8872D00C9DC56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C537A85626B8872D00C9DC56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C537A85826B8872D00C9DC56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C537A85B26B8872D00C9DC56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C537A85826B8872D00C9DC56 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		C537A85D26B8872F00C9DC56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C537A86026B8872F00C9DC56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C537A86226B8872F00C9DC56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C537A86826B9541E00C9DC56 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		C537A86B26B955D900C9DC56 /* StartScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +55,21 @@
 			isa = PBXGroup;
 			children = (
 				C537A85426B8872D00C9DC56 /* AppDelegate.swift */,
-				C537A85626B8872D00C9DC56 /* SceneDelegate.swift */,
-				C537A85826B8872D00C9DC56 /* ViewController.swift */,
-				C537A85A26B8872D00C9DC56 /* Main.storyboard */,
+				C5C2687B26B982E200A29111 /* StartScreen */,
 				C537A85D26B8872F00C9DC56 /* Assets.xcassets */,
-				C537A85F26B8872F00C9DC56 /* LaunchScreen.storyboard */,
 				C537A86226B8872F00C9DC56 /* Info.plist */,
+				C537A86826B9541E00C9DC56 /* LaunchScreen.xib */,
 			);
 			path = MobileUpGallery;
+			sourceTree = "<group>";
+		};
+		C5C2687B26B982E200A29111 /* StartScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C537A85826B8872D00C9DC56 /* StartVC.swift */,
+				C537A86B26B955D900C9DC56 /* StartScreen.xib */,
+			);
+			path = StartScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,9 +129,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C537A86126B8872F00C9DC56 /* LaunchScreen.storyboard in Resources */,
+				C537A86C26B955D900C9DC56 /* StartScreen.xib in Resources */,
+				C537A86926B9541E00C9DC56 /* LaunchScreen.xib in Resources */,
 				C537A85E26B8872F00C9DC56 /* Assets.xcassets in Resources */,
-				C537A85C26B8872D00C9DC56 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,32 +142,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C537A85926B8872D00C9DC56 /* ViewController.swift in Sources */,
+				C537A85926B8872D00C9DC56 /* StartVC.swift in Sources */,
 				C537A85526B8872D00C9DC56 /* AppDelegate.swift in Sources */,
-				C537A85726B8872D00C9DC56 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		C537A85A26B8872D00C9DC56 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C537A85B26B8872D00C9DC56 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C537A85F26B8872F00C9DC56 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C537A86026B8872F00C9DC56 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C537A86326B8872F00C9DC56 /* Debug */ = {
@@ -287,6 +272,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52TSGWFG39;
 				INFOPLIST_FILE = MobileUpGallery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -306,6 +292,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 52TSGWFG39;
 				INFOPLIST_FILE = MobileUpGallery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

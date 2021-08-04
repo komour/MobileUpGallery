@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyVK
 
 class StartViewController: UIViewController {
 
@@ -20,7 +21,14 @@ class StartViewController: UIViewController {
     }
 
     @IBAction func authButtonAction() {
-        print(#function)
+        VK.sessions.default.logIn(
+            onSuccess: { info in
+                print("SwiftyVK: success authorize with", info)
+            },
+            onError: { error in
+                print("SwiftyVK: authorize failed with", error)
+            }
+        )
     }
     
 }

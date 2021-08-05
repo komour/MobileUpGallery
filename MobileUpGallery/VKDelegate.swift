@@ -14,7 +14,6 @@ final class VKDelegate: SwiftyVKDelegate {
     
     init() {
         VK.setUp(appId: appId, delegate: self)
-        print(#function)
     }
     
     func vkNeedsScopes(for sessionId: String) -> Scopes {
@@ -22,7 +21,6 @@ final class VKDelegate: SwiftyVKDelegate {
     }
     
     func vkNeedToPresent(viewController: VKViewController) {
-        
         if let rootController = UIApplication.shared.windows.first?.rootViewController {
             rootController.present(viewController, animated: true)
         }
@@ -39,6 +37,4 @@ final class VKDelegate: SwiftyVKDelegate {
     func vkTokenRemoved(for sessionId: String) {
         print("token removed in session \(sessionId)")
     }
-    
-    
 }

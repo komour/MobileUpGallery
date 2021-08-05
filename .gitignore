@@ -91,3 +91,5 @@ iOSInjectionProject/
 
 Podfile.lock
 .DS_Store
+Pods/
+*.xcworkspace

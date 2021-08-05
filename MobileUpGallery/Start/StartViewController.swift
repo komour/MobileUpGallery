@@ -21,25 +21,20 @@ class StartViewController: UIViewController {
     }
 
     @IBAction func authButtonAction() {
-//        TODO
-        let navigationController = UINavigationController()
-        navigationController.setViewControllers([GalleryViewController()], animated: false)
-        navigationController.modalPresentationStyle = .fullScreen
-        self.present(navigationController, animated: true, completion: nil)
-//        VK.sessions.default.logIn(
-//            onSuccess: { info in
-//                DispatchQueue.main.async {
-//                    let navigationController = UINavigationController()
-//                    navigationController.setViewControllers([GalleryViewController()], animated: false)
-//                    navigationController.modalPresentationStyle = .fullScreen
-//                    self.present(navigationController, animated: true, completion: nil)
-//                }
-//                print("SwiftyVK: success authorize with", info)
-//            },
-//            onError: { error in
-//                print("SwiftyVK: authorize failed with", error)
-//            }
-//        )
+        VK.sessions.default.logIn(
+            onSuccess: { info in
+                DispatchQueue.main.async {
+                    let navigationController = UINavigationController()
+                    navigationController.setViewControllers([GalleryViewController()], animated: false)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    self.present(navigationController, animated: true, completion: nil)
+                }
+                print("SwiftyVK: success authorize with", info)
+            },
+            onError: { error in
+                print("SwiftyVK: authorize failed with", error)
+            }
+        )
     }
     
 }

@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShowPhotoViewController" customModule="MobileUpGallery" customModuleProvider="target">
             <connections>
+                <outlet property="imageView" destination="hQ9-Tu-PcL" id="95V-2l-ZB0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,8 +19,21 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hQ9-Tu-PcL">
+                    <rect key="frame" x="0.0" y="161" width="414" height="414"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="hQ9-Tu-PcL" secondAttribute="height" multiplier="1:1" id="qPT-eU-29f"/>
+                    </constraints>
+                </imageView>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="hQ9-Tu-PcL" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="QUF-jg-M76"/>
+                <constraint firstItem="hQ9-Tu-PcL" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dtN-uc-SjN"/>
+                <constraint firstItem="hQ9-Tu-PcL" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="qMB-BN-Lwe"/>
+            </constraints>
             <point key="canvasLocation" x="34.782608695652179" y="59.510869565217398"/>
         </view>
     </objects>

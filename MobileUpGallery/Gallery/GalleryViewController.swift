@@ -6,23 +6,15 @@
 //
 
 import UIKit
+import SwiftyVK
 
 class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     let reusableCellId = "loadReuseId"
+    let spacingBetweenCells: CGFloat = 2
+    let numberOfItemsPerRow: CGFloat = 2
     
-    let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 2.5, left: 2.5, bottom: 2.5, right: 2.5)
-        layout.minimumLineSpacing = 2.5
-        layout.minimumInteritemSpacing = 2.5
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        
-//        TODO constants
-        cv.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: "loadReuseId")
-        return cv
-    }()
+    @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +28,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         self.navigationItem.rightBarButtonItem  = logoutButton
         
 //        collectionView setting
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .white
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: reusableCellId)
 
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -49,7 +36,16 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
     }
     
     @objc func doLogout() {
-        dismiss(animated: true, completion: nil)
+        let alert = UIAlertController(title: nil, message: "Вы уверены, что хотите выйти?", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Выйти", style: .destructive, handler: { _ in
+            VK.sessions.default.logOut()
+            alert.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -72,10 +68,7 @@ extension GalleryViewController: UICollectionViewDataSource {
     
 //    TODO constants
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let numberOfItemsPerRow: CGFloat = 2
-        let spacing: CGFloat = 2.5
-        let spacingBetweenCells: CGFloat = spacing
-        let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells)
+        let totalSpacing = (numberOfItemsPerRow - 1) * spacingBetweenCells
         let width = (collectionView.bounds.width - totalSpacing) / numberOfItemsPerRow
         return CGSize(width: width, height: width)
     }

@@ -16,10 +16,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         vkDelegateReference = VKDelegate()
-        
         window = UIWindow.init(frame: UIScreen.main.bounds)
-        window?.rootViewController = StartViewController()
+        
+        let startVC = StartViewController()
+        window?.rootViewController = startVC
         window?.makeKeyAndVisible()
+        
+        if VK.sessions.default.state == SessionState.authorized {
+//            TODO duplicated code
+            let navigationController = UINavigationController()
+            navigationController.setViewControllers([GalleryViewController()], animated: false)
+            navigationController.modalPresentationStyle = .fullScreen
+            startVC.present(navigationController, animated: true, completion: nil)
+        }
         return true
     }
 }

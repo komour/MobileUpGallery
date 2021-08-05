@@ -48,7 +48,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         collectionView.reloadData()
     }
     
-    @objc func doLogout(sender: UIButton!) {
+    @objc func doLogout() {
         dismiss(animated: true, completion: nil)
     }
 }
@@ -85,6 +85,10 @@ extension GalleryViewController: UICollectionViewDataSource {
 
 extension GalleryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let showPhotoVC = ShowPhotoViewController()
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.pushViewController(showPhotoVC, animated: true)
         print(#function, indexPath)
     }
 }

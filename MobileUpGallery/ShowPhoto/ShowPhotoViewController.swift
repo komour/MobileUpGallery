@@ -12,10 +12,11 @@ class ShowPhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.title = "Date"
+        self.title = "Date"
         
 //        share button setting
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(doShare))
+        shareButton.tintColor = .black
         self.navigationItem.rightBarButtonItem = shareButton
         
 //        image view setting

@@ -26,6 +26,12 @@ class ShowPhotoViewController: UIViewController {
     }
     
     @objc func doShare() {
-//        TODO
+        guard let image = imageView.image else {
+            print("nil image in \(#function)")
+            return
+        }
+        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }

@@ -14,6 +14,9 @@
 		C537A86926B9541E00C9DC56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C537A86826B9541E00C9DC56 /* LaunchScreen.xib */; };
 		C537A86C26B955D900C9DC56 /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C537A86B26B955D900C9DC56 /* StartViewController.xib */; };
 		C5C268CA26BA1BA200A29111 /* VKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268C926BA1BA200A29111 /* VKDelegate.swift */; };
+		C5C268DC26BB50DF00A29111 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268DA26BB50DF00A29111 /* GalleryViewController.swift */; };
+		C5C268DF26BB571900A29111 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268DE26BB571900A29111 /* GalleryCollectionViewCell.swift */; };
+		C5C268E126BB5BFA00A29111 /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5C268E026BB5BFA00A29111 /* GalleryViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		C537A86826B9541E00C9DC56 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		C537A86B26B955D900C9DC56 /* StartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
 		C5C268C926BA1BA200A29111 /* VKDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDelegate.swift; sourceTree = "<group>"; };
+		C5C268DA26BB50DF00A29111 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		C5C268DE26BB571900A29111 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		C5C268E026BB5BFA00A29111 /* GalleryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
 		E01DDDE5C68940F666072942 /* Pods-MobileUpGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileUpGallery.debug.xcconfig"; path = "Target Support Files/Pods-MobileUpGallery/Pods-MobileUpGallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				C537A85426B8872D00C9DC56 /* AppDelegate.swift */,
+				C5C268D926BB4F0900A29111 /* Gallery */,
 				C5C2687B26B982E200A29111 /* Start */,
 				C537A85D26B8872F00C9DC56 /* Assets.xcassets */,
 				C537A86226B8872F00C9DC56 /* Info.plist */,
@@ -97,6 +104,16 @@
 				C537A86B26B955D900C9DC56 /* StartViewController.xib */,
 			);
 			path = Start;
+			sourceTree = "<group>";
+		};
+		C5C268D926BB4F0900A29111 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				C5C268DA26BB50DF00A29111 /* GalleryViewController.swift */,
+				C5C268E026BB5BFA00A29111 /* GalleryViewController.xib */,
+				C5C268DE26BB571900A29111 /* GalleryCollectionViewCell.swift */,
+			);
+			path = Gallery;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C537A86C26B955D900C9DC56 /* StartViewController.xib in Resources */,
+				C5C268E126BB5BFA00A29111 /* GalleryViewController.xib in Resources */,
 				C537A86926B9541E00C9DC56 /* LaunchScreen.xib in Resources */,
 				C537A85E26B8872F00C9DC56 /* Assets.xcassets in Resources */,
 			);
@@ -214,6 +232,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C537A85926B8872D00C9DC56 /* StartViewController.swift in Sources */,
+				C5C268DF26BB571900A29111 /* GalleryCollectionViewCell.swift in Sources */,
+				C5C268DC26BB50DF00A29111 /* GalleryViewController.swift in Sources */,
 				C537A85526B8872D00C9DC56 /* AppDelegate.swift in Sources */,
 				C5C268CA26BA1BA200A29111 /* VKDelegate.swift in Sources */,
 			);

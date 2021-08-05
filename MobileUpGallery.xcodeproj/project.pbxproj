@@ -17,6 +17,8 @@
 		C5C268DC26BB50DF00A29111 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268DA26BB50DF00A29111 /* GalleryViewController.swift */; };
 		C5C268DF26BB571900A29111 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268DE26BB571900A29111 /* GalleryCollectionViewCell.swift */; };
 		C5C268E126BB5BFA00A29111 /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5C268E026BB5BFA00A29111 /* GalleryViewController.xib */; };
+		C5C268E526BC0FA000A29111 /* ShowPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268E326BC0FA000A29111 /* ShowPhotoViewController.swift */; };
+		C5C268E626BC0FA000A29111 /* ShowPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5C268E426BC0FA000A29111 /* ShowPhotoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		C5C268DA26BB50DF00A29111 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		C5C268DE26BB571900A29111 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		C5C268E026BB5BFA00A29111 /* GalleryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
+		C5C268E326BC0FA000A29111 /* ShowPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPhotoViewController.swift; sourceTree = "<group>"; };
+		C5C268E426BC0FA000A29111 /* ShowPhotoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowPhotoViewController.xib; sourceTree = "<group>"; };
 		E01DDDE5C68940F666072942 /* Pods-MobileUpGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileUpGallery.debug.xcconfig"; path = "Target Support Files/Pods-MobileUpGallery/Pods-MobileUpGallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				C537A85426B8872D00C9DC56 /* AppDelegate.swift */,
+				C5C268E226BC0F7E00A29111 /* ShowPhoto */,
 				C5C268D926BB4F0900A29111 /* Gallery */,
 				C5C2687B26B982E200A29111 /* Start */,
 				C537A85D26B8872F00C9DC56 /* Assets.xcassets */,
@@ -114,6 +119,15 @@
 				C5C268DE26BB571900A29111 /* GalleryCollectionViewCell.swift */,
 			);
 			path = Gallery;
+			sourceTree = "<group>";
+		};
+		C5C268E226BC0F7E00A29111 /* ShowPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				C5C268E326BC0FA000A29111 /* ShowPhotoViewController.swift */,
+				C5C268E426BC0FA000A29111 /* ShowPhotoViewController.xib */,
+			);
+			path = ShowPhoto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +192,7 @@
 				C537A86C26B955D900C9DC56 /* StartViewController.xib in Resources */,
 				C5C268E126BB5BFA00A29111 /* GalleryViewController.xib in Resources */,
 				C537A86926B9541E00C9DC56 /* LaunchScreen.xib in Resources */,
+				C5C268E626BC0FA000A29111 /* ShowPhotoViewController.xib in Resources */,
 				C537A85E26B8872F00C9DC56 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5C268E526BC0FA000A29111 /* ShowPhotoViewController.swift in Sources */,
 				C537A85926B8872D00C9DC56 /* StartViewController.swift in Sources */,
 				C5C268DF26BB571900A29111 /* GalleryCollectionViewCell.swift in Sources */,
 				C5C268DC26BB50DF00A29111 /* GalleryViewController.swift in Sources */,

@@ -1,0 +1,13 @@
+//
+//  LoadPhotosProtocol.swift
+//  MobileUpGallery
+//
+//  Created by Andrey Komarov on 8/5/21.
+//
+
+import Foundation
+
+
+protocol LoadPhotosProtocol {
+  func loadPhotos(completion: @escaping (_ success: Bool) -> Void)
+}

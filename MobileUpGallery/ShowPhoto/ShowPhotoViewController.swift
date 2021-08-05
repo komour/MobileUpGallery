@@ -8,8 +8,9 @@
 import UIKit
 
 class ShowPhotoViewController: UIViewController {
-
+    
     @IBOutlet weak var imageView: UIImageView!
+    var photoUrl: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,11 @@ class ShowPhotoViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = shareButton
         
 //        image view setting
-        imageView.image = #imageLiteral(resourceName: "placeholder")
+        if let photoUrl = photoUrl {
+            imageView.loadImageUsingUrlString(urlString: photoUrl)
+        } else {
+            imageView.image = #imageLiteral(resourceName: "placeholder")
+        }
     }
     
     @objc func doShare() {

@@ -10,7 +10,6 @@ import UIKit
 class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
     let reusableCellId = "loadReuseId"
-
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -20,7 +19,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         
-//        TODO
+//        TODO constants
         cv.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: "loadReuseId")
         return cv
     }()
@@ -44,8 +43,6 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
 
-//        collectionView.isHidden = true
-
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.reloadData()
@@ -56,6 +53,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
     }
 }
 
+// MARK: - UICollectionViewDataSource
 
 extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -72,6 +70,7 @@ extension GalleryViewController: UICollectionViewDataSource {
         return cellUnwrapped
     }
     
+//    TODO constants
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let numberOfItemsPerRow: CGFloat = 2
         let spacing: CGFloat = 2.5
@@ -82,6 +81,7 @@ extension GalleryViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 
 extension GalleryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

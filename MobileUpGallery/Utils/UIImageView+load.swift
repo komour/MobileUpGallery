@@ -9,22 +9,21 @@ import UIKit
 
 extension UIImageView {
     func loadImageUsingUrlString(urlString: String) {
-        let url = URL(string: urlString)
-        guard let urlUnwrapped = url else {
+        guard let url = URL(string: urlString) else {
             print("nil url in \(#function)")
             return
         }
-        URLSession.shared.dataTask(with: urlUnwrapped, completionHandler: { (data, _, error) in
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
             if let error = error {
-                print(error)
+                print("Error in \(#function): \(error)")
                 return
             }
-            guard let dataUnwrapped = data else {
+            if let data = data {
+                DispatchQueue.main.async {
+                    self.image = UIImage(data: data)
+                }
+            } else {
                 print("nil data in \(#function)")
-                return
-            }
-            DispatchQueue.main.async {
-                self.image = UIImage(data: dataUnwrapped)
             }
         }).resume()
     }

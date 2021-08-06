@@ -10,35 +10,30 @@ import SwiftyVK
 
 class LoadPhotosManager: LoadPhotosProtocol {
     
-    var viewController: GalleryViewController?
+    private var galleryViewController: GalleryViewController
     
     init (for viewController: GalleryViewController) {
-        self.viewController = viewController
+        self.galleryViewController = viewController
     }
     
     private enum RequestError: Error {
-          case networkError
-          case wrongUrl
-          case parsingError
+        case networkError
+        case parsingError
     }
     
     func loadPhotos(completion: @escaping (Bool) -> Void) {
         requestPhotos { result in
             switch result {
-                case .failure(let error):
-                    print(error)
-                case .success:
-                    completion(true)
+            case .failure(let error):
+                print("Error loading photos in \(#function): \(error)")
+                completion(false)
+            case .success:
+                completion(true)
             }
         }
     }
     
     private func requestPhotos(completion: @escaping(Result<Bool, RequestError>) -> Void) {
-        guard let vc = viewController else {
-            print("nil LoadPhotosVC in \(#function)")
-            return
-        }
-
         VK.API.Photos.get([
             .ownerId: "-128666765",
             .albumId: "266276915",
@@ -49,36 +44,34 @@ class LoadPhotosManager: LoadPhotosProtocol {
         ]).onSuccess { response in
             do {
                 let responseDecoded = try JSONDecoder().decode(GetPhotosResponse.self, from: response)
-                print(responseDecoded.count)
-                vc.photos = responseDecoded.items
+                self.galleryViewController.photos = responseDecoded.items
                 completion(.success(true))
             } catch let parsingError {
                 completion(.failure(.parsingError))
-                print("Error", parsingError)
+                print("Parsing error in \(#function): \(parsingError)")
             }
         }.onError { (error) in
             print("Request failed with error: \(error)")
+            completion(.failure(.networkError))
         }.send()
     }
     
     func createUrlSessionDataTask(urlString: String, for imageView: UIImageView) -> URLSessionDataTask? {
-        let url = URL(string: urlString)
-        guard let urlUnwrapped = url else {
+        guard let url = URL(string: urlString) else {
             print("nil url in \(#function)")
             return nil
         }
-        
-        return URLSession.shared.dataTask(with: urlUnwrapped, completionHandler: { (data, _, error) in
+        return URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
             if let error = error {
-                print(error)
+                print("Error in \(#function): \(error)")
                 return
             }
-            guard let dataUnwrapped = data else {
+            if let data = data {
+                DispatchQueue.main.async {
+                    imageView.image = UIImage(data: data)
+                }
+            } else {
                 print("nil data in \(#function)")
-                return
-            }
-            DispatchQueue.main.async {
-                imageView.image = UIImage(data: dataUnwrapped)
             }
         })
     }

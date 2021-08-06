@@ -14,7 +14,7 @@ final class VKDelegate: SwiftyVKDelegate {
     
     init() {
         VK.setUp(appId: appId, delegate: self)
-        VK.sessions.default.config.attemptTimeout = 3
+        VK.sessions.default.config.attemptTimeout = 5
     }
     
     func vkNeedsScopes(for sessionId: String) -> Scopes {

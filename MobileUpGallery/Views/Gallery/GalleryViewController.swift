@@ -10,12 +10,12 @@ import SwiftyVK
 
 class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     
-    let reusableCellId = "loadReuseId"
-    let spacingBetweenCells: CGFloat = 2
-    let numberOfItemsPerRow: CGFloat = 2
-    var urlListHasBeenLoaded = false
+    private let reusableCellId = "loadReuseId"
+    private let spacingBetweenCells: CGFloat = 2
+    private let numberOfItemsPerRow: CGFloat = 2
+    var photosHaveBeenLoaded = false
     
-    lazy var loadPhotosManager: LoadPhotosProtocol = LoadPhotosManager(for: self)
+    private lazy var loadPhotosManager: LoadPhotosProtocol = LoadPhotosManager(for: self)
     var photos = [Photo]()
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -24,48 +24,65 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Mobile Up Gallery"
+        setUpTitle()
+        setUpLogoutButton()
+        setUpCollectionView()
         
-//        logoutButton setting
-        let logoutButton = UIBarButtonItem(title: "Выход", style: .plain, target: self, action: #selector(doLogout))
-        logoutButton.tintColor = .black
-        logoutButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .medium)], for: .normal)
-        self.navigationItem.rightBarButtonItem = logoutButton
-        
-//        collectionView setting
-        collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: reusableCellId)
-        collectionView.isHidden = true
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.reloadData()
-        
-        DispatchQueue.global(qos: .default).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             self.loadPhotos()
         }
     }
-    
     
     func loadPhotos() {
         DispatchQueue.main.async {
             self.activityIndicator.startAnimating()
         }
-        loadPhotosManager.loadPhotos { (success) -> Void in
+        loadPhotosManager.loadPhotos { (success: Bool) -> Void in
             if success {
                 DispatchQueue.main.async {
                     self.collectionView.isHidden = false
                     self.activityIndicator.stopAnimating()
-                    self.urlListHasBeenLoaded = true
+                    self.photosHaveBeenLoaded = true
                     self.collectionView.reloadData()
                 }
             } else {
-                print(#function)
+                self.presentLoadPhotosErrorAlert()
+                self.activityIndicator.stopAnimating()
+                print("Fail loading photos in \(#function)")
             }
         }
     }
     
+    func presentLoadPhotosErrorAlert() {
+        let alert = UIAlertController(title: "Ошибка сети",
+                                      message: "Проверьте свое интернет-соединение и перезайдите в аккаунт.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
     
+    func setUpLogoutButton() {
+        let logoutButton = UIBarButtonItem(title: "Выход", style: .plain, target: self, action: #selector(presentLogoutAlert))
+        logoutButton.tintColor = .black
+        logoutButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .medium)], for: .normal)
+        self.navigationItem.rightBarButtonItem = logoutButton
+    }
     
-    @objc func doLogout() {
+    func setUpCollectionView() {
+        collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: reusableCellId)
+        collectionView.isHidden = true
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.reloadData()
+    }
+    
+    func setUpTitle() {
+        title = "Mobile Up Gallery"
+    }
+    
+    @objc func presentLogoutAlert() {
         let alert = UIAlertController(title: nil, message: "Вы уверены, что хотите выйти?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Выйти", style: .destructive, handler: { _ in
             VK.sessions.default.logOut()
@@ -83,7 +100,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
 
 extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        17
+        photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -91,7 +108,7 @@ extension GalleryViewController: UICollectionViewDataSource {
         guard let cellUnwrapped = cell else {
             return UICollectionViewCell()
         }
-        if urlListHasBeenLoaded {
+        if photosHaveBeenLoaded {
             let dataTaskForCell = loadPhotosManager.createUrlSessionDataTask(
                 urlString: photos[indexPath.row].biggestImage.url,
                 for: cellUnwrapped.loadedPhotoImageView
@@ -99,12 +116,11 @@ extension GalleryViewController: UICollectionViewDataSource {
             cellUnwrapped.curDataTask = dataTaskForCell
             dataTaskForCell?.resume()
         } else {
-            cellUnwrapped.curImage = #imageLiteral(resourceName: "placeholder")
+            cellUnwrapped.loadedPhotoImageView.image = #imageLiteral(resourceName: "placeholder")
         }
         return cellUnwrapped
     }
     
-//    TODO constants
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let totalSpacing = (numberOfItemsPerRow - 1) * spacingBetweenCells
         let width = (collectionView.bounds.width - totalSpacing) / numberOfItemsPerRow

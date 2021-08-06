@@ -11,12 +11,13 @@ import SwiftyVK
 class StartViewController: UIViewController {
 
     @IBOutlet weak var authButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpAuthButton()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func setUpAuthButton() {
         authButton.layer.cornerRadius = 12
     }
 
@@ -33,8 +34,20 @@ class StartViewController: UIViewController {
             },
             onError: { error in
                 print("SwiftyVK: authorize failed with", error)
+                DispatchQueue.main.async {
+                    self.presentNetworkErrorAlert()
+                }
             }
         )
     }
     
+    func presentNetworkErrorAlert() {
+        let alert = UIAlertController(title: "Ошибка сети",
+                                      message: "Проверьте свое интернет-соединение и попробуйте снова.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  StartViewController.swift
 //  MobileUpGallery
 //
 //  Created by Andrey Komarov on 8/2/21.
@@ -9,19 +9,37 @@ import SwiftyVK
 import UIKit
 
 class StartViewController: UIViewController {
-    @IBOutlet var authButton: UIButton!
+    // MARK: - Subviews
+
+    @IBOutlet private var authButton: UIButton!
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAuthButton()
     }
 
-    func setUpAuthButton() {
+    // MARK: - Private methods
+
+    private func presentNetworkErrorAlert() {
+        let alert = UIAlertController(title: LocalizedStrings.networkError,
+                                      message: LocalizedStrings.checkAndRetry,
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func setUpAuthButton() {
         authButton.layer.cornerRadius = 12
         authButton.setTitle(LocalizedStrings.enterViaVK, for: .normal)
     }
 
-    @IBAction func authButtonAction() {
+    // MARK: - UI Actions
+
+    @IBAction private func authButtonAction() {
         VK.sessions.default.logIn(
             onSuccess: { info in
                 DispatchQueue.main.async {
@@ -42,15 +60,5 @@ class StartViewController: UIViewController {
                 }
             }
         )
-    }
-
-    func presentNetworkErrorAlert() {
-        let alert = UIAlertController(title: LocalizedStrings.networkError,
-                                      message: LocalizedStrings.checkAndRetry,
-                                      preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        present(alert, animated: true, completion: nil)
     }
 }

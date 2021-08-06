@@ -9,16 +9,24 @@ import SwiftyVK
 import UIKit
 
 class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+    // MARK: - Public properties
+
+    public var photos = [Photo]()
+    public var photosHaveBeenLoaded = false
+
+    // MARK: - Private properties
+
     private let reusableCellId = "loadReuseId"
     private let spacingBetweenCells: CGFloat = 2
     private let numberOfItemsPerRow: CGFloat = 2
-    var photosHaveBeenLoaded = false
-
     private lazy var loadPhotosManager: LoadPhotosProtocol = LoadPhotosManager(for: self)
-    var photos = [Photo]()
 
-    @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    // MARK: - Subviews
+
+    @IBOutlet private var collectionView: UICollectionView!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +40,9 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         }
     }
 
-    func loadPhotos() {
+    // MARK: - Private methods
+
+    private func loadPhotos() {
         DispatchQueue.main.async {
             self.activityIndicator.startAnimating()
         }
@@ -52,7 +62,26 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         }
     }
 
-    func presentLoadPhotosErrorAlert() {
+    private func setUpLogoutButton() {
+        let logoutButton = UIBarButtonItem(title: LocalizedStrings.logout, style: .plain, target: self, action: #selector(presentLogoutAlert))
+        logoutButton.tintColor = .black
+        logoutButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .medium)], for: .normal)
+        navigationItem.rightBarButtonItem = logoutButton
+    }
+
+    private func setUpCollectionView() {
+        collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: reusableCellId)
+        collectionView.isHidden = true
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.reloadData()
+    }
+
+    private func setUpTitle() {
+        title = "Mobile Up Gallery"
+    }
+
+    private func presentLoadPhotosErrorAlert() {
         let alert = UIAlertController(title: LocalizedStrings.networkError,
                                       message: LocalizedStrings.checkAndRelogin,
                                       preferredStyle: .alert)
@@ -62,26 +91,9 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         present(alert, animated: true, completion: nil)
     }
 
-    func setUpLogoutButton() {
-        let logoutButton = UIBarButtonItem(title: LocalizedStrings.logout, style: .plain, target: self, action: #selector(presentLogoutAlert))
-        logoutButton.tintColor = .black
-        logoutButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .medium)], for: .normal)
-        navigationItem.rightBarButtonItem = logoutButton
-    }
+    // MARK: - UI Actions
 
-    func setUpCollectionView() {
-        collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: reusableCellId)
-        collectionView.isHidden = true
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.reloadData()
-    }
-
-    func setUpTitle() {
-        title = "Mobile Up Gallery"
-    }
-
-    @objc func presentLogoutAlert() {
+    @objc private func presentLogoutAlert() {
         let alert = UIAlertController(title: nil, message: LocalizedStrings.areYouSureLogOut, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: LocalizedStrings.doLogOut, style: .destructive, handler: { _ in
             VK.sessions.default.logOut()

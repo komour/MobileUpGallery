@@ -9,13 +9,19 @@ import Foundation
 import SwiftyVK
 
 final class VKDelegate: SwiftyVKDelegate {
+    // MARK: - Private properties
+
     private let appId = "7918495"
     private let scopes: Scopes = []
+
+    // MARK: - Inits
 
     init() {
         VK.setUp(appId: appId, delegate: self)
         VK.sessions.default.config.attemptTimeout = 5
     }
+
+    // MARK: - Delegate methods
 
     func vkNeedsScopes(for sessionId: String) -> Scopes {
         return scopes

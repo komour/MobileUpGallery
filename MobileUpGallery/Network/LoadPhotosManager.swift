@@ -35,12 +35,12 @@ class LoadPhotosManager: LoadPhotosProtocol {
     
     private func requestPhotos(completion: @escaping(Result<Bool, RequestError>) -> Void) {
         VK.API.Photos.get([
-            .ownerId: "-128666765",
-            .albumId: "266276915",
-            .photoSizes: "1",
-            .rev: "0",
-            .offset: "0",
-            .count: "17"
+            .ownerId: RequestParameters.ownerId,
+            .albumId: RequestParameters.albumId,
+            .photoSizes: RequestParameters.photoSizes,
+            .rev: RequestParameters.rev,
+            .offset: RequestParameters.offset,
+            .count: RequestParameters.count
         ]).onSuccess { response in
             do {
                 let responseDecoded = try JSONDecoder().decode(GetPhotosResponse.self, from: response)
@@ -55,4 +55,13 @@ class LoadPhotosManager: LoadPhotosProtocol {
             completion(.failure(.networkError))
         }.send()
     }
+}
+
+struct RequestParameters {
+    static let ownerId = "-128666765"
+    static let albumId = "266276915"
+    static let photoSizes = "1"
+    static let rev = "0"
+    static let offset = "0"
+    static let count = "17"
 }

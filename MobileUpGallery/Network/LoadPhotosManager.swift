@@ -12,7 +12,7 @@ class LoadPhotosManager: LoadPhotosProtocol {
     
     private var galleryViewController: GalleryViewController
     
-    init (for viewController: GalleryViewController) {
+    init(for viewController: GalleryViewController) {
         self.galleryViewController = viewController
     }
     

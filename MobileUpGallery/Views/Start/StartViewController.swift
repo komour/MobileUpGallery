@@ -5,18 +5,17 @@
 //  Created by Andrey Komarov on 8/2/21.
 //
 
-import UIKit
 import SwiftyVK
+import UIKit
 
 class StartViewController: UIViewController {
+    @IBOutlet var authButton: UIButton!
 
-    @IBOutlet weak var authButton: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAuthButton()
     }
-    
+
     func setUpAuthButton() {
         authButton.layer.cornerRadius = 12
         authButton.setTitle(LocalizedStrings.enterViaVK, for: .normal)
@@ -44,7 +43,7 @@ class StartViewController: UIViewController {
             }
         )
     }
-    
+
     func presentNetworkErrorAlert() {
         let alert = UIAlertController(title: LocalizedStrings.networkError,
                                       message: LocalizedStrings.checkAndRetry,
@@ -52,6 +51,6 @@ class StartViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
             alert.dismiss(animated: true, completion: nil)
         }))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }

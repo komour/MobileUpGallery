@@ -8,7 +8,6 @@
 import UIKit
 
 class GalleryCollectionViewCell: UICollectionViewCell {
-    
     let loadedPhotoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "placeholder")
@@ -17,12 +16,12 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         iv.clipsToBounds = true
         return iv
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpImageView()
     }
-    
+
     func setUpImageView() {
         contentView.addSubview(loadedPhotoImageView)
         loadedPhotoImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -30,7 +29,7 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         loadedPhotoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         loadedPhotoImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

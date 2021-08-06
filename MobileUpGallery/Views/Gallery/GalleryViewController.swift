@@ -5,34 +5,33 @@
 //  Created by Andrey Komarov on 8/5/21.
 //
 
-import UIKit
 import SwiftyVK
+import UIKit
 
 class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayout {
-    
     private let reusableCellId = "loadReuseId"
     private let spacingBetweenCells: CGFloat = 2
     private let numberOfItemsPerRow: CGFloat = 2
     var photosHaveBeenLoaded = false
-    
+
     private lazy var loadPhotosManager: LoadPhotosProtocol = LoadPhotosManager(for: self)
     var photos = [Photo]()
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setUpTitle()
         setUpLogoutButton()
         setUpCollectionView()
-        
+
         DispatchQueue.global(qos: .userInteractive).async {
             self.loadPhotos()
         }
     }
-    
+
     func loadPhotos() {
         DispatchQueue.main.async {
             self.activityIndicator.startAnimating()
@@ -52,7 +51,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
             }
         }
     }
-    
+
     func presentLoadPhotosErrorAlert() {
         let alert = UIAlertController(title: LocalizedStrings.networkError,
                                       message: LocalizedStrings.checkAndRelogin,
@@ -60,16 +59,16 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         alert.addAction(UIAlertAction(title: LocalizedStrings.ok, style: .default, handler: { _ in
             alert.dismiss(animated: true, completion: nil)
         }))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
-    
+
     func setUpLogoutButton() {
         let logoutButton = UIBarButtonItem(title: LocalizedStrings.logout, style: .plain, target: self, action: #selector(presentLogoutAlert))
         logoutButton.tintColor = .black
         logoutButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .medium)], for: .normal)
-        self.navigationItem.rightBarButtonItem = logoutButton
+        navigationItem.rightBarButtonItem = logoutButton
     }
-    
+
     func setUpCollectionView() {
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: reusableCellId)
         collectionView.isHidden = true
@@ -77,11 +76,11 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         collectionView.delegate = self
         collectionView.reloadData()
     }
-    
+
     func setUpTitle() {
         title = "Mobile Up Gallery"
     }
-    
+
     @objc func presentLogoutAlert() {
         let alert = UIAlertController(title: nil, message: LocalizedStrings.areYouSureLogOut, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: LocalizedStrings.doLogOut, style: .destructive, handler: { _ in
@@ -92,7 +91,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         alert.addAction(UIAlertAction(title: LocalizedStrings.cancel, style: .cancel, handler: { _ in
             alert.dismiss(animated: true, completion: nil)
         }))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -102,7 +101,7 @@ extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photos.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellId, for: indexPath) as? GalleryCollectionViewCell
         guard let cellUnwrapped = cell else {
@@ -114,7 +113,7 @@ extension GalleryViewController: UICollectionViewDataSource {
         }
         return cellUnwrapped
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let totalSpacing = (numberOfItemsPerRow - 1) * spacingBetweenCells
         let width = (collectionView.bounds.width - totalSpacing) / numberOfItemsPerRow

@@ -34,9 +34,12 @@ class StartViewController: UIViewController {
                 print("SwiftyVK: success authorize with", info)
             },
             onError: { error in
-                print("SwiftyVK: authorize failed with", error)
-                DispatchQueue.main.async {
-                    self.presentNetworkErrorAlert()
+                if case VKError.authorizationCancelled = error {
+                } else {
+                    print("SwiftyVK: authorize failed with", error)
+                    DispatchQueue.main.async {
+                        self.presentNetworkErrorAlert()
+                    }
                 }
             }
         )

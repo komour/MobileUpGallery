@@ -9,20 +9,6 @@ import UIKit
 
 class GalleryCollectionViewCell: UICollectionViewCell {
     
-    var curImage: UIImage = #imageLiteral(resourceName: "placeholder") {
-        didSet {
-            loadedPhotoImageView.image = curImage
-        }
-    }
-    
-    var curDataTask: URLSessionDataTask?
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        curImage = #imageLiteral(resourceName: "placeholder")
-        curDataTask?.cancel()
-    }
-    
     let loadedPhotoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "placeholder")
@@ -32,9 +18,20 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
+    var curDataTask: URLSessionDataTask?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        setUpImageView()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        loadedPhotoImageView.image = #imageLiteral(resourceName: "placeholder")
+        curDataTask?.cancel()
+    }
+    
+    func setUpImageView() {
         contentView.addSubview(loadedPhotoImageView)
         loadedPhotoImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         loadedPhotoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true

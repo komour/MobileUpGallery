@@ -12,24 +12,22 @@ import SwiftyVK
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var vkDelegateReference : SwiftyVKDelegate?
+    var vkDelegateReference: SwiftyVKDelegate?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         vkDelegateReference = VKDelegate()
-        window = UIWindow.init(frame: UIScreen.main.bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         
-        let startVC = StartViewController()
-        window?.rootViewController = startVC
+        let startViewController = StartViewController()
+        window?.rootViewController = startViewController
         window?.makeKeyAndVisible()
         
         if VK.sessions.default.state == SessionState.authorized {
-//            TODO duplicated code
             let navigationController = UINavigationController()
             navigationController.setViewControllers([GalleryViewController()], animated: false)
             navigationController.modalPresentationStyle = .fullScreen
-            startVC.present(navigationController, animated: true, completion: nil)
+            startViewController.present(navigationController, animated: true, completion: nil)
         }
         return true
     }
 }
-

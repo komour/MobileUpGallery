@@ -108,13 +108,8 @@ extension GalleryViewController: UICollectionViewDataSource {
         guard let cellUnwrapped = cell else {
             return UICollectionViewCell()
         }
-        if photosHaveBeenLoaded {
-            let dataTaskForCell = loadPhotosManager.createUrlSessionDataTask(
-                urlString: photos[indexPath.row].biggestImage.url,
-                for: cellUnwrapped.loadedPhotoImageView
-            )
-            cellUnwrapped.curDataTask = dataTaskForCell
-            dataTaskForCell?.resume()
+        if photosHaveBeenLoaded, let url = URL(string: photos[indexPath.row].biggestImage.url) {
+            cellUnwrapped.loadedPhotoImageView.kf.setImage(with: url)
         } else {
             cellUnwrapped.loadedPhotoImageView.image = #imageLiteral(resourceName: "placeholder")
         }

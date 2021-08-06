@@ -10,5 +10,4 @@ import UIKit
 
 protocol LoadPhotosProtocol {
     func loadPhotos(completion: @escaping (_ success: Bool) -> Void)
-    func createUrlSessionDataTask(urlString: String, for imageView: UIImageView) -> URLSessionDataTask?
 }

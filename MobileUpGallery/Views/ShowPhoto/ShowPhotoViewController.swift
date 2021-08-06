@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ShowPhotoViewController: UIViewController {
     
@@ -28,10 +29,9 @@ class ShowPhotoViewController: UIViewController {
     }
     
     func setUpImageView() {
-        if let photoUrl = photoUrl {
-            imageView.loadImageUsingUrlString(urlString: photoUrl)
-        } else {
-            imageView.image = #imageLiteral(resourceName: "placeholder")
+        imageView.image = #imageLiteral(resourceName: "placeholder")
+        if let photoUrl = photoUrl, let photoUrl = URL(string: photoUrl) {
+            imageView.kf.setImage(with: photoUrl)
         }
     }
     

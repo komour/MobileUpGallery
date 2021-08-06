@@ -18,17 +18,9 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         return iv
     }()
     
-    var curDataTask: URLSessionDataTask?
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpImageView()
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        loadedPhotoImageView.image = #imageLiteral(resourceName: "placeholder")
-        curDataTask?.cancel()
     }
     
     func setUpImageView() {

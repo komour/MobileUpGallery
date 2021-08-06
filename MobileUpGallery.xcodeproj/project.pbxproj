@@ -25,6 +25,7 @@
 		C5C268F026BC6C4A00A29111 /* GetPhotosResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268EF26BC6C4A00A29111 /* GetPhotosResponse.swift */; };
 		C5C268F326BC6DCB00A29111 /* LoadPhotosProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268F226BC6DCB00A29111 /* LoadPhotosProtocol.swift */; };
 		C5C268F526BC6DED00A29111 /* LoadPhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268F426BC6DED00A29111 /* LoadPhotosManager.swift */; };
+		C5C268F926BD5F0300A29111 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C268F826BD5F0200A29111 /* LocalizedStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		C5C268EF26BC6C4A00A29111 /* GetPhotosResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPhotosResponse.swift; sourceTree = "<group>"; };
 		C5C268F226BC6DCB00A29111 /* LoadPhotosProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPhotosProtocol.swift; sourceTree = "<group>"; };
 		C5C268F426BC6DED00A29111 /* LoadPhotosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPhotosManager.swift; sourceTree = "<group>"; };
+		C5C268F826BD5F0200A29111 /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
 		E01DDDE5C68940F666072942 /* Pods-MobileUpGallery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileUpGallery.debug.xcconfig"; path = "Target Support Files/Pods-MobileUpGallery/Pods-MobileUpGallery.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				C5C268ED26BC6AC200A29111 /* UIImageView+load.swift */,
+				C5C268F826BD5F0200A29111 /* LocalizedStrings.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				C5C268DC26BB50DF00A29111 /* GalleryViewController.swift in Sources */,
 				C5C268F326BC6DCB00A29111 /* LoadPhotosProtocol.swift in Sources */,
 				C537A85526B8872D00C9DC56 /* AppDelegate.swift in Sources */,
+				C5C268F926BD5F0300A29111 /* LocalizedStrings.swift in Sources */,
 				C5C268CA26BA1BA200A29111 /* VKDelegate.swift in Sources */,
 				C5C268E926BC63C200A29111 /* PhotoInfo.swift in Sources */,
 				C5C268EE26BC6AC200A29111 /* UIImageView+load.swift in Sources */,

@@ -54,17 +54,17 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
     }
     
     func presentLoadPhotosErrorAlert() {
-        let alert = UIAlertController(title: "Ошибка сети",
-                                      message: "Проверьте свое интернет-соединение и перезайдите в аккаунт.",
+        let alert = UIAlertController(title: LocalizedStrings.networkError,
+                                      message: LocalizedStrings.checkAndRelogin,
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: LocalizedStrings.ok, style: .default, handler: { _ in
             alert.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
     }
     
     func setUpLogoutButton() {
-        let logoutButton = UIBarButtonItem(title: "Выход", style: .plain, target: self, action: #selector(presentLogoutAlert))
+        let logoutButton = UIBarButtonItem(title: LocalizedStrings.logout, style: .plain, target: self, action: #selector(presentLogoutAlert))
         logoutButton.tintColor = .black
         logoutButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .medium)], for: .normal)
         self.navigationItem.rightBarButtonItem = logoutButton
@@ -83,13 +83,13 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
     }
     
     @objc func presentLogoutAlert() {
-        let alert = UIAlertController(title: nil, message: "Вы уверены, что хотите выйти?", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Выйти", style: .destructive, handler: { _ in
+        let alert = UIAlertController(title: nil, message: LocalizedStrings.areYouSureLogOut, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: LocalizedStrings.doLogOut, style: .destructive, handler: { _ in
             VK.sessions.default.logOut()
             alert.dismiss(animated: true, completion: nil)
             self.dismiss(animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
+        alert.addAction(UIAlertAction(title: LocalizedStrings.cancel, style: .cancel, handler: { _ in
             alert.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)

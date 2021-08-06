@@ -65,8 +65,8 @@ class ShowPhotoViewController: UIViewController {
     }
     
     func presentSuccessAlert() {
-        let alert = UIAlertController(title: nil, message: "Изображение успешно сохранено.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
+        let alert = UIAlertController(title: nil, message: LocalizedStrings.successSave, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: LocalizedStrings.ok, style: .default, handler: { _ in
             alert.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)

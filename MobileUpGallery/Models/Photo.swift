@@ -8,7 +8,7 @@
 import Foundation
 
 struct Photo: Decodable {
-    let date: Int
+    let date: Double
     let sizes: [Size]
     
     var biggestSize: Size {
@@ -26,7 +26,7 @@ struct Photo: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.date = try container.decode(Int.self, forKey: .date)
+        self.date = try container.decode(Double.self, forKey: .date)
         self.sizes = try container.decode([Size].self, forKey: .sizes)
     }
     

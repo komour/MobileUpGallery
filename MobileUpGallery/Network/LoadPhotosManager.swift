@@ -13,31 +13,31 @@ class LoadPhotosManager: LoadPhotosProtocol {
     var viewController: GalleryViewController?
     
     init (for viewController: GalleryViewController) {
-      self.viewController = viewController
+        self.viewController = viewController
     }
     
     private enum RequestError: Error {
-      case networkError
-      case wrongUrl
-      case parsingError
+          case networkError
+          case wrongUrl
+          case parsingError
     }
     
     func loadPhotos(completion: @escaping (Bool) -> Void) {
         requestPhotos { result in
-          switch result {
-          case .failure(let error):
-            print(error)
-          case .success:
-            completion(true)
-          }
+            switch result {
+                case .failure(let error):
+                    print(error)
+                case .success:
+                    completion(true)
+            }
         }
     }
     
     private func requestPhotos(completion: @escaping(Result<Bool, RequestError>) -> Void) {
-      guard let vc = viewController else {
-        print("nil LoadPhotosVC in \(#function)")
-        return
-      }
+        guard let vc = viewController else {
+            print("nil LoadPhotosVC in \(#function)")
+            return
+        }
 
         VK.API.Photos.get([
             .ownerId: "-128666765",
@@ -48,7 +48,6 @@ class LoadPhotosManager: LoadPhotosProtocol {
             .count: "17"
         ]).onSuccess { response in
             do {
-//                print(String(data: response, encoding: .utf8))
                 let responseDecoded = try JSONDecoder().decode(GetPhotosResponse.self, from: response)
                 print(responseDecoded.count)
                 vc.photos = responseDecoded.items

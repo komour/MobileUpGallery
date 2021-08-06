@@ -34,7 +34,6 @@ class GalleryCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         contentView.addSubview(loadedPhotoImageView)
         loadedPhotoImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         loadedPhotoImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true

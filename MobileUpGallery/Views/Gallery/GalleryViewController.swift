@@ -44,23 +44,26 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         }
     }
     
+    
     func loadPhotos() {
-      DispatchQueue.main.async {
-        self.activityIndicator.startAnimating()
-      }
-      loadPhotosManager.loadPhotos { (success) -> Void in
-        if success {
-          DispatchQueue.main.async {
-            self.collectionView.isHidden = false
-            self.activityIndicator.stopAnimating()
-            self.urlListHasBeenLoaded = true
-            self.collectionView.reloadData()
-          }
-        } else {
-          print(#function)
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
         }
-      }
+        loadPhotosManager.loadPhotos { (success) -> Void in
+            if success {
+                DispatchQueue.main.async {
+                    self.collectionView.isHidden = false
+                    self.activityIndicator.stopAnimating()
+                    self.urlListHasBeenLoaded = true
+                    self.collectionView.reloadData()
+                }
+            } else {
+                print(#function)
+            }
+        }
     }
+    
+    
     
     @objc func doLogout() {
         let alert = UIAlertController(title: nil, message: "Вы уверены, что хотите выйти?", preferredStyle: .actionSheet)
@@ -89,9 +92,10 @@ extension GalleryViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         if urlListHasBeenLoaded {
-            let dataTaskForCell = loadPhotosManager
-                .createUrlSessionDataTask(urlString: photos[indexPath.row].biggestImage.url,
-                                          for: cellUnwrapped.loadedPhotoImageView)
+            let dataTaskForCell = loadPhotosManager.createUrlSessionDataTask(
+                urlString: photos[indexPath.row].biggestImage.url,
+                for: cellUnwrapped.loadedPhotoImageView
+            )
             cellUnwrapped.curDataTask = dataTaskForCell
             dataTaskForCell?.resume()
         } else {

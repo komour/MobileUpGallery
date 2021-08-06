@@ -39,7 +39,7 @@ class LoadPhotosManager: LoadPhotosProtocol {
             .photoSizes: RequestParameters.photoSizes,
             .rev: RequestParameters.rev,
             .offset: RequestParameters.offset,
-            .count: RequestParameters.count,
+            .count: RequestParameters.count
         ]).onSuccess { response in
             do {
                 let responseDecoded = try JSONDecoder().decode(GetPhotosResponse.self, from: response)

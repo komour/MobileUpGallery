@@ -90,11 +90,12 @@ extension GalleryViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         if urlListHasBeenLoaded {
-            cellUnwrapped.loadedPhotoImageView.loadImageUsingUrlString(urlString: photos[indexPath.row].biggestSize.url)
+            let dataTaskForCell = loadPhotosManager.createUrlSessionDataTask(urlString: photos[indexPath.row].biggestSize.url, imageView: cellUnwrapped.loadedPhotoImageView)
+            cellUnwrapped.curDataTask = dataTaskForCell
+            dataTaskForCell?.resume()
         } else {
-          cellUnwrapped.curImage = #imageLiteral(resourceName: "placeholder")
+            cellUnwrapped.curImage = #imageLiteral(resourceName: "placeholder")
         }
-        
         return cellUnwrapped
     }
     
@@ -112,9 +113,9 @@ extension GalleryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let showPhotoVC = ShowPhotoViewController()
         showPhotoVC.photoUrl = photos[indexPath.row].biggestSize.url
+        showPhotoVC.date = photos[indexPath.row].date
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(showPhotoVC, animated: true)
-        print(#function, indexPath)
     }
 }

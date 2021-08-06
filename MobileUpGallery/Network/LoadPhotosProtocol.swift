@@ -6,8 +6,9 @@
 //
 
 import Foundation
-
+import UIKit
 
 protocol LoadPhotosProtocol {
-  func loadPhotos(completion: @escaping (_ success: Bool) -> Void)
+    func loadPhotos(completion: @escaping (_ success: Bool) -> Void)
+    func createUrlSessionDataTask(urlString: String, imageView: UIImageView) -> URLSessionDataTask?
 }

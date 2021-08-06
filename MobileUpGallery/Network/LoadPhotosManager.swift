@@ -61,4 +61,26 @@ class LoadPhotosManager: LoadPhotosProtocol {
             print("Request failed with error: \(error)")
         }.send()
     }
+    
+    func createUrlSessionDataTask(urlString: String, imageView: UIImageView) -> URLSessionDataTask? {
+        let url = URL(string: urlString)
+        guard let urlUnwrapped = url else {
+            print("nil url in \(#function)")
+            return nil
+        }
+        
+        return URLSession.shared.dataTask(with: urlUnwrapped, completionHandler: { (data, _, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let dataUnwrapped = data else {
+                print("nil data in \(#function)")
+                return
+            }
+            DispatchQueue.main.async {
+                imageView.image = UIImage(data: dataUnwrapped)
+            }
+        })
+    }
 }

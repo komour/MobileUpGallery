@@ -15,6 +15,14 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var curDataTask: URLSessionDataTask?
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        curImage = #imageLiteral(resourceName: "placeholder")
+        curDataTask?.cancel()
+    }
+    
     let loadedPhotoImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "placeholder")

@@ -19,6 +19,7 @@ class StartViewController: UIViewController {
     
     func setUpAuthButton() {
         authButton.layer.cornerRadius = 12
+        authButton.setTitle(LocalizedStrings.enterViaVK, for: .normal)
     }
 
     @IBAction func authButtonAction() {
@@ -42,8 +43,8 @@ class StartViewController: UIViewController {
     }
     
     func presentNetworkErrorAlert() {
-        let alert = UIAlertController(title: "Ошибка сети",
-                                      message: "Проверьте свое интернет-соединение и попробуйте снова.",
+        let alert = UIAlertController(title: LocalizedStrings.networkError,
+                                      message: LocalizedStrings.checkAndRetry,
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in
             alert.dismiss(animated: true, completion: nil)

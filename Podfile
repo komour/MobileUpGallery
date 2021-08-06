@@ -7,5 +7,7 @@ target 'MobileUpGallery' do
   use_frameworks!
 
   pod 'SwiftyVK'
+  pod 'UIKit-Plus', '~> 2.0.0-alpha.1.9.0'
+  pod 'Kingfisher'
 
 end

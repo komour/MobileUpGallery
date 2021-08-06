@@ -31,12 +31,12 @@ class StartViewController: UIViewController {
                     navigationController.modalPresentationStyle = .fullScreen
                     self.present(navigationController, animated: true, completion: nil)
                 }
-                print("SwiftyVK: success authorize with", info)
+                print("SwiftyVK: success authorize with \(info)")
             },
             onError: { error in
                 if case VKError.authorizationCancelled = error {
                 } else {
-                    print("SwiftyVK: authorize failed with", error)
+                    print("SwiftyVK: authorize failed with \(error)")
                     DispatchQueue.main.async {
                         self.presentNetworkErrorAlert()
                     }

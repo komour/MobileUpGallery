@@ -62,7 +62,7 @@ class LoadPhotosManager: LoadPhotosProtocol {
         }.send()
     }
     
-    func createUrlSessionDataTask(urlString: String, imageView: UIImageView) -> URLSessionDataTask? {
+    func createUrlSessionDataTask(urlString: String, for imageView: UIImageView) -> URLSessionDataTask? {
         let url = URL(string: urlString)
         guard let urlUnwrapped = url else {
             print("nil url in \(#function)")

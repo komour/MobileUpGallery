@@ -12,11 +12,11 @@ import SwiftyVK
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var vkDelegateReference : SwiftyVKDelegate?
+    var vkDelegateReference: SwiftyVKDelegate?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         vkDelegateReference = VKDelegate()
-        window = UIWindow.init(frame: UIScreen.main.bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         
         let startVC = StartViewController()
         window?.rootViewController = startVC
@@ -32,4 +32,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 }
-

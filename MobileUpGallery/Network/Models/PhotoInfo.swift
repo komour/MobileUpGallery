@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Size: Decodable {
+struct PhotoInfo: Decodable {
     let height: Int
     let width: Int
     let url: String
@@ -23,9 +23,9 @@ struct Size: Decodable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case height = "height"
-        case width = "width"
-        case url = "url"
-        case type = "type"
+        case height
+        case width
+        case url
+        case type
     }
 }

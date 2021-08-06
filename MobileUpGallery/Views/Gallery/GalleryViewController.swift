@@ -30,7 +30,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         let logoutButton = UIBarButtonItem(title: "Выход", style: .plain, target: self, action: #selector(doLogout))
         logoutButton.tintColor = .black
         logoutButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .medium)], for: .normal)
-        self.navigationItem.rightBarButtonItem  = logoutButton
+        self.navigationItem.rightBarButtonItem = logoutButton
         
 //        collectionView setting
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: reusableCellId)
@@ -44,7 +44,6 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         }
     }
     
-
     func loadPhotos() {
       DispatchQueue.main.async {
         self.activityIndicator.startAnimating()
@@ -90,7 +89,9 @@ extension GalleryViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         if urlListHasBeenLoaded {
-            let dataTaskForCell = loadPhotosManager.createUrlSessionDataTask(urlString: photos[indexPath.row].biggestSize.url, imageView: cellUnwrapped.loadedPhotoImageView)
+            let dataTaskForCell = loadPhotosManager
+                .createUrlSessionDataTask(urlString: photos[indexPath.row].biggestImage.url,
+                                          for: cellUnwrapped.loadedPhotoImageView)
             cellUnwrapped.curDataTask = dataTaskForCell
             dataTaskForCell?.resume()
         } else {
@@ -112,7 +113,7 @@ extension GalleryViewController: UICollectionViewDataSource {
 extension GalleryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let showPhotoVC = ShowPhotoViewController()
-        showPhotoVC.photoUrl = photos[indexPath.row].biggestSize.url
+        showPhotoVC.photoUrl = photos[indexPath.row].biggestImage.url
         showPhotoVC.date = photos[indexPath.row].date
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = .black

@@ -50,7 +50,7 @@ class ShowPhotoViewController: UIViewController {
             return
         }
         let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = { activity, success, items, error in
+        activityViewController.completionWithItemsHandler = { activity, success, _, _ in
             if activity == .saveToCameraRoll && success == true {
                 let alert = UIAlertController(title: nil, message: "Изображение успешно сохранено.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ок", style: .default, handler: { _ in

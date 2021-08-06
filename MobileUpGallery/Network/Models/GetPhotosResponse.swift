@@ -19,7 +19,7 @@ struct GetPhotosResponse: Decodable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case count = "count"
-        case items = "items"
+        case count
+        case items
     }
 }

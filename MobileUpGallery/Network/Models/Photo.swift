@@ -9,29 +9,27 @@ import Foundation
 
 struct Photo: Decodable {
     let date: Double
-    let sizes: [Size]
+    let info: [PhotoInfo]
     
-    var biggestSize: Size {
+    var biggestImage: PhotoInfo {
         var biggestWidth = 0
         var idx = 0
-        for i in 0..<sizes.count {
-            if sizes[i].width > biggestWidth {
-                biggestWidth = sizes[i].width
-                idx = i
-            }
+        for i in 0..<info.count where info[i].width > biggestWidth {
+            biggestWidth = info[i].width
+            idx = i
         }
-        return sizes[idx]
+        return info[idx]
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.date = try container.decode(Double.self, forKey: .date)
-        self.sizes = try container.decode([Size].self, forKey: .sizes)
+        self.info = try container.decode([PhotoInfo].self, forKey: .info)
     }
     
     enum CodingKeys: String, CodingKey {
-        case date = "date"
-        case sizes = "sizes"
+        case date
+        case info = "sizes"
     }
 }

@@ -22,7 +22,7 @@ final class VKDelegate: SwiftyVKDelegate {
     }
     
     func vkNeedToPresent(viewController: VKViewController) {
-        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let keyWindow = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
         if var topController = keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
@@ -31,11 +31,11 @@ final class VKDelegate: SwiftyVKDelegate {
         }
     }
     
-    func vkTokenCreated(for sessionId: String, info: [String : String]) {
+    func vkTokenCreated(for sessionId: String, info: [String: String]) {
         print("token created in session \(sessionId) with info \(info)")
     }
     
-    func vkTokenUpdated(for sessionId: String, info: [String : String]) {
+    func vkTokenUpdated(for sessionId: String, info: [String: String]) {
         print("token updated in session \(sessionId) with info \(info)")
     }
     

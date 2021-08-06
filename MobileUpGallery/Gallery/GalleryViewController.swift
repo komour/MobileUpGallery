@@ -13,8 +13,13 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
     let reusableCellId = "loadReuseId"
     let spacingBetweenCells: CGFloat = 2
     let numberOfItemsPerRow: CGFloat = 2
+    var urlListHasBeenLoaded = false
+    
+    lazy var loadPhotosManager: LoadPhotosProtocol = LoadPhotosManager(for: self)
+    var photos = [Photo]()
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +34,33 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
         
 //        collectionView setting
         collectionView.register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: reusableCellId)
-
+        collectionView.isHidden = true
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.reloadData()
+        
+        DispatchQueue.global(qos: .default).async {
+            self.loadPhotos()
+        }
+    }
+    
+
+    func loadPhotos() {
+      DispatchQueue.main.async {
+        self.activityIndicator.startAnimating()
+      }
+      loadPhotosManager.loadPhotos { (success) -> Void in
+        if success {
+          DispatchQueue.main.async {
+            self.collectionView.isHidden = false
+            self.activityIndicator.stopAnimating()
+            self.urlListHasBeenLoaded = true
+            self.collectionView.reloadData()
+          }
+        } else {
+          print(#function)
+        }
+      }
     }
     
     @objc func doLogout() {
@@ -53,7 +81,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegateFlowLayou
 
 extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        30
+        17
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -61,8 +89,13 @@ extension GalleryViewController: UICollectionViewDataSource {
         guard let cellUnwrapped = cell else {
             return UICollectionViewCell()
         }
-        cellUnwrapped.curImage = #imageLiteral(resourceName: "placeholder")
-        
+        if urlListHasBeenLoaded {
+            let dataTaskForCell = loadPhotosManager.createUrlSessionDataTask(urlString: photos[indexPath.row].biggestSize.url, imageView: cellUnwrapped.loadedPhotoImageView)
+            cellUnwrapped.curDataTask = dataTaskForCell
+            dataTaskForCell?.resume()
+        } else {
+            cellUnwrapped.curImage = #imageLiteral(resourceName: "placeholder")
+        }
         return cellUnwrapped
     }
     
@@ -79,9 +112,10 @@ extension GalleryViewController: UICollectionViewDataSource {
 extension GalleryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let showPhotoVC = ShowPhotoViewController()
+        showPhotoVC.photoUrl = photos[indexPath.row].biggestSize.url
+        showPhotoVC.date = photos[indexPath.row].date
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = .black
         navigationController?.pushViewController(showPhotoVC, animated: true)
-        print(#function, indexPath)
     }
 }

@@ -106,7 +106,7 @@ extension GalleryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableCellId, for: indexPath) as? GalleryCollectionViewCell
         guard let cellUnwrapped = cell else {
-            return UICollectionViewCell()
+            fatalError("nil cell in \(#function)")
         }
         cellUnwrapped.loadedPhotoImageView.image = #imageLiteral(resourceName: "placeholder")
         if photosHaveBeenLoaded, let url = URL(string: photos[indexPath.row].biggestImage.url) {
@@ -130,7 +130,10 @@ extension GalleryViewController: UICollectionViewDelegate {
         showPhotoVC.photoUrl = photos[indexPath.row].biggestImage.url
         showPhotoVC.date = photos[indexPath.row].date
         navigationItem.backButtonTitle = ""
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.pushViewController(showPhotoVC, animated: true)
+        guard let navigationController = navigationController else {
+            fatalError("nil navigationController in \(#function)")
+        }
+        navigationController.navigationBar.tintColor = .black
+        navigationController.pushViewController(showPhotoVC, animated: true)
     }
 }
